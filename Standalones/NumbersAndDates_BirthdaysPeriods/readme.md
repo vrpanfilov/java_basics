@@ -30,3 +30,6 @@
 сможете в разделе
 
 ![](https://i.imgur.com/vyl2YnF.png)
+
+## Ключевые слова
+LocalDate, DateTimeFormatter, isBefore, Period
