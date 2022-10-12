@@ -1,3 +1,3 @@
-# DateTime
+# Arithmetics
 Ключевые слова:
 <p>

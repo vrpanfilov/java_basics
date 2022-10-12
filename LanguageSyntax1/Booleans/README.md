@@ -1,3 +1,3 @@
-# DateTime
+# Booleans
 Ключевые слова:
 <p>
