@@ -1,0 +1,3 @@
+# InheritanceAbstractClasses
+### Ключевые слова
+abstract
