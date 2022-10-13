@@ -31,5 +31,5 @@
 
 ![](https://i.imgur.com/vyl2YnF.png)
 
-# Ключевые слова
+### Ключевые слова
 String.format, Math.random()
