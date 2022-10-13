@@ -6,25 +6,14 @@ import java.util.regex.Pattern;
 public class SplitText {
     public static String splitTextIntoWords(String text) {
         //TODO реализуйте метод
-
-        String regex = "[\\’A-Za-z]+";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(text);
-        String res = "";
-        if (text.isEmpty()) {
-            return res;
+        text = text.replaceAll("\\d", "");
+        text = text.replaceAll("\\s*(\\s|,|!|\\.|;|-)\\s*", " ");
+        String[] words = text.split(" ");
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < words.length - 1; i++) {
+            builder.append(words[i]).append(System.lineSeparator());
         }
-        while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            String word = text.substring(start, end);
-            if (end == text.length() - 1) {
-                res = res.concat(word);
-            } else {
-                res = res.concat(word + System.lineSeparator());
-            }
-        }
-        return res;
+        return builder.append(words[words.length - 1]).toString();
     }
 
     public static void main(String[] args) {
