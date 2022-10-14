@@ -91,8 +91,7 @@ public class JsonEncoder {
                     .collect(Collectors
                             .toMap(Map.Entry::getKey,
                                     Map.Entry::getValue,
-                                    (e1, e2) -> e1,
-                                    LinkedHashMap::new));
+                                    (e1, e2) -> e1, LinkedHashMap::new));
             return toJSONString(sortedMap);
         }
     }
