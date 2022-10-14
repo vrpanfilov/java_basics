@@ -1,0 +1,3 @@
+# CreationOfLinkedPurchaseList
+### Ключевые слова:
+Hibernate
