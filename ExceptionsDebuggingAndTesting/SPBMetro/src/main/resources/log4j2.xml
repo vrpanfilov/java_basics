@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="warn">
+  <CustomLevels>
+    <CustomLevel name="LOW_BOUND" intLevel="250"/>
+    <CustomLevel name="EXCEPTION_FILE" intLevel="251"/>
+    <CustomLevel name="ERROR_FILE" intLevel="252"/>
+    <CustomLevel name="SEARCH_FILE" intLevel="253"/>
+  </CustomLevels>
+  <appenders>
+    <File name="SearchFile" fileName="logs/searches.log">
+      <Filters>
+        <ThresholdFilter level="ERROR_FILE" onMatch="DENY" onMismatch="NEUTRAL"/>
+        <ThresholdFilter level="SEARCH_FILE" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n"/>
+    </File>
+    <File name="ErrorsFile" fileName="logs/input_errors.log">
+      <Filters>
+        <ThresholdFilter level="EXCEPTION_FILE" onMatch="DENY" onMismatch="NEUTRAL"/>
+        <ThresholdFilter level="ERROR_FILE" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] - %msg%n"/>
+    </File>
+    <File name="ExceptionsFile" fileName="logs/exceptions.log">
+      <Filters>
+        <ThresholdFilter level="LOW_BOUND" onMatch="DENY" onMismatch="NEUTRAL"/>
+        <ThresholdFilter level="EXCEPTION_FILE" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] - %msg%n"/>
+    </File>
+  </appenders>
+
+  <loggers>
+    <root level="TRACE">
+      <appender-ref ref="SearchFile" level="search_file"/>
+      <appender-ref ref="ErrorsFile" level="error_file"/>
+      <appender-ref ref="ExceptionsFile" level="exception_file"/>
+    </root>
+  </loggers>
+</configuration>
