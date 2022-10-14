@@ -1,7 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/todolist?serverTimezone=Europe/Moscow
-    useSSL: false
+    url: jdbc:mysql://localhost:3306/todolist?serverTimezone=Europe/Moscow&useSSL=false&useUnicode=true&characterEncoding=utf8
     username: se_user
     password: se_user
   jpa:
