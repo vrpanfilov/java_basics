@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<div id="todo-form">
+    <form>
+        <h2>Добавление задания</h2>
+        <label>Исполнитель:</label>
+        <input type="text" name="executor">
+        <label>Содержание задания:</label>
+        <input type="text" name="content" value="">
+        <label>Начало:</label>
+        <input type="text" name="startDate" value="">
+        <label>Окончание:</label>
+        <input type="text" name="endDate" value="">
+        <hr>
+        <button id="save-todo">Сохранить</button>
+    </form>
+</div>
+<h1>Список дел (<span th:text="${todosCount}">0</span>)</h1>
+<button id="show-add-todo-form">Добавить дело</button>
+<br><br>
+<div id="todo-list">
+    <div th:each="todo : ${todos}">
+        <button class="delete-todo" th:attr="data-id=${todo.id}">X</button>
+        <a href="#" class="todo-link" th:attr="data-id=${todo.id}" th:text="${todo.content}"></a>
+    </div>
+</div>
+<br/>
+<button id="delete-all" class="delete-todo">Удалить все дела</button>
+</body>
