@@ -4,14 +4,11 @@ import java.util.Scanner;
 
 public class FullNameFormatter {
 
-    private static final String WRONG_FIO = "Введенная строка не является ФИО";
-    private static final String ls = System.lineSeparator();
     private static int start;
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        outerCycle:
         while (true) {
             start = 0;
             String input = scanner.nextLine();
@@ -21,54 +18,52 @@ public class FullNameFormatter {
             }
             //TODO:напишите ваш код тут, результат вывести в консоль.
             //При невалидном ФИО вывести в консоль: Введенная строка не является ФИО
-            String[] words = input.split(" ");
-            if (words.length != 3) {
-                System.out.println(WRONG_FIO);
-                continue;
+
+            String ls = System.lineSeparator();
+            String output = "";
+            String surname = getItem(input);
+            String firstname = getItem(input);
+            String patronymic = getItem(input);
+
+            if (surname.isEmpty() || firstname.isEmpty() || patronymic.isEmpty()
+                    || hasPostfix(input)) {
+                System.out.println("Введенная строка не является ФИО");
+            } else {
+                System.out.print("Фамилия: " + surname + ls +
+                        "Имя: " + firstname + ls +
+                        "Отчество: " + patronymic + ls);
             }
-            String[] surnames = words[0].split("-");
-            if (surnames.length > 2) {
-                System.out.println(WRONG_FIO);
-                continue;
-            }
-            for (String surname : surnames) {
-                if (!wordIsName(surname)) {
-                    System.out.println(WRONG_FIO);
-                    continue outerCycle;
-                }
-            }
-            for (int i = 1; i < 3; i++) {
-                if (!wordIsName(words[i])) {
-                    System.out.println(WRONG_FIO);
-                    continue outerCycle;
-                }
-            }
-            System.out.print("Фамилия: " + words[0] + ls +
-                    "Имя: " + words[1] + ls +
-                    "Отчество: " + words[2] + ls);
         }
     }
 
-    private static boolean wordIsName(String word) {
-        if (word.length() < 2) {
-            return false;
-        }
-        if (!charIsUppercase(word.charAt(0))) {
-            return false;
-        }
-        for (int i = 1; i < word.length(); i++) {
-            if (!charIsLowercase(word.charAt(i))) {
-                return false;
+    private static String getItem(String input) {
+        String result = "";
+        int end = input.indexOf(" ", start);
+        if (end > 0) {
+            result = input.substring(start, end);
+        } else {
+            if (start < input.length()) {
+                end = input.length() - 1;
+                result = input.substring(start, input.length());
+            } else {
+                return "";
             }
         }
-        return true;
+        start = end + 1;
+        for (int i = 0; i < result.length(); i++) {
+            char symb = result.charAt(i);
+            if ((symb < 'А' || symb > 'Я') &&
+                    symb != 'Ё' &&
+                    (symb < 'а' || symb > 'я') &&
+                    symb != 'ё' &&
+                    symb != '-') {
+                return "";
+            }
+        }
+        return result;
     }
 
-    private static boolean charIsUppercase(char ch) {
-        return ch >= 'А' && ch <= 'Я' || ch == 'Ё';
-    }
-
-    private static boolean charIsLowercase(char ch) {
-        return ch >= 'а' && ch <= 'я' || ch == 'ё';
+    private static boolean hasPostfix(String input) {
+        return start < input.length();
     }
 }
