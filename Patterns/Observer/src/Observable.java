@@ -9,7 +9,7 @@ public class Observable {
     public void unsubscribe(Observer observer) {
         observers.remove(observer);
     }
-    public void notifyObservers() {
+    public void notifyObservers() { 
         observers.forEach(observer -> observer.update());
     }
 }
